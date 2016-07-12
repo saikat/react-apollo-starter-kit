@@ -21,7 +21,7 @@ This is an opinionated starter kit to start making an Apollo-based app. The goal
 ## Other features of this kit
 * Automatic asset versioning so that you can aggressively cache your assets in production
 * Server side rendering out of the box
-* Custom network interface that lets you add middleware to handle responses from GraphQL. GraphQL does not prescribe any specific error contract between the client and server, so this would be a good place to put any error handling that you want to do globally (e.g. unexpected errors from GraphQL, user authorization or authentication errors, etc.).
+* Custom Apollo network interface that lets you add middleware to handle responses from GraphQL. This would be a good place to put any error handling that you want to do globally (e.g. unexpected errors from GraphQL, user authorization or authentication errors, etc.).
 * Sane handling of unexpected exceptions:
     * Calls to log.error in client/server will log the error to the console/stdout and also send it to Rollbar.
     * Unexpected exceptions in client-side code (including within asynchronous code): log.error + force refresh the app after an alert to the user
