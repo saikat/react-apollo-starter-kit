@@ -4,7 +4,7 @@ import config from './config'
 import log from '../src/server/log'
 
 const webpackPort = 3000
-const appPort = process.env.EXPRESS_PORT
+const appPort = process.env.DEV_APP_PORT
 
 Object.keys(config.entry)
 .forEach((key) => {
