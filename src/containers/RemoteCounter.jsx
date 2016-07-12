@@ -25,6 +25,13 @@ function RemoteCounter({ data, addCount, mutations }) {
         }}>
           Click to increase count
         </button>
+        <br />
+        <button onClick={async () => {
+          // This is temporary until https://github.com/apollostack/react-apollo/issues/93 is done
+          let mutationResult = await mutations.induceError()
+        }}>
+          Click to induce a GraphQL error
+        </button>
         <div>
           <Link to='/local-counter'>
             See a version using client-side memory
@@ -69,6 +76,13 @@ const mapMutationsToProps = ({ ownProps, state }) => ({
     variables: {
       amount: 1
     }
+  }),
+  induceError: () => ({
+    mutation: gql`
+      mutation induceError {
+        induceError
+      }
+    `
   })
 })
 

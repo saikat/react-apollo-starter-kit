@@ -8,6 +8,7 @@ const rootSchema = `
 
   type RootMutation {
     addCount(amount: Int!): Count
+    induceError: String
   }
 
   schema {
@@ -24,6 +25,9 @@ const rootResolvers = {
     addCount(_, { amount }) {
       Data.count += amount
       return Data.count
+    },
+    induceError() {
+      throw new Error('Error message')
     }
   }
 }

@@ -8,6 +8,7 @@ import errorCatcher from './error-catcher'
 import routes from '../routes'
 import Store from '../store'
 import { ApolloProvider } from 'react-apollo'
+import ApolloClientSingleton from '../network/apollo-client-singleton'
 
 window.log = log
 window.onerror = (msg, file, line, col, error) => { errorCatcher(error) }
@@ -19,7 +20,7 @@ const history = syncHistoryWithStore(browserHistory, store.data)
 StyleSheet.rehydrate(window.RENDERED_CLASS_NAMES)
 
 ReactDOM.render(
-  <ApolloProvider store={store.data} client={Store.apolloClient}>
+  <ApolloProvider store={store.data} client={ApolloClientSingleton}>
     <Router history={history} routes={routes} />
   </ApolloProvider>,
   document.getElementById('mount')

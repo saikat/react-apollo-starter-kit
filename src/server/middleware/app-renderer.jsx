@@ -4,6 +4,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import { StyleSheetServer } from 'aphrodite'
 import routes from '../../routes'
 import { ApolloProvider } from 'react-apollo'
+import ApolloClientSingleton from '../../network/apollo-client-singleton'
 import React from 'react'
 import renderIndex from './render-index'
 import Store from '../../store'
@@ -38,7 +39,7 @@ export default wrap(async (req, res) => {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
       const { html, css } = StyleSheetServer.renderStatic(() => renderToString(
-        <ApolloProvider store={store.data} client={Store.apolloClient}>
+        <ApolloProvider store={store.data} client={ApolloClientSingleton}>
           <RouterContext {...renderProps} />
         </ApolloProvider>
         )
