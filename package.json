@@ -1,7 +1,7 @@
 {
-  "name": "react-apollo-starter-kit",
+  "name": "spoke",
   "version": "1.0.0",
-  "description": "React Apollo starter kit",
+  "description": "Spoke",
   "main": "src/server",
   "engines": {
     "node": "6.2.2",
@@ -35,12 +35,12 @@
     "organizing",
     "field"
   ],
-  "author": "Axle Factory",
-  "license": "MIT",
+  "author": "Saikat Chakrabarti",
+  "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/saikat/react-apollo-starter-kit/issues"
+    "url": "https://github.com/saikat/spoke/issues"
   },
-  "homepage": "https://github.com/saikat/saikat/react-apollo-starter-kit/#readme",
+  "homepage": "https://github.com/saikat/saikat/spoke/#readme",
   "dependencies": {
     "aphrodite": "^0.4.1",
     "apollo-client": "^0.3.29",
