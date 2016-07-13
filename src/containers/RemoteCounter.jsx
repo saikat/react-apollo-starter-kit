@@ -56,8 +56,7 @@ const mapQueriesToProps = () => ({
           amount
         }
       }
-    `,
-    forcFetch: true
+    `
   }
 })
 
