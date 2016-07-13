@@ -48,7 +48,7 @@ RemoteCounter.propTypes = {
   mutations: React.PropTypes.object.isRequired
 }
 
-const mapQueriesToProps = ({ ownProps, state }) => ({
+const mapQueriesToProps = () => ({
   data: {
     query: gql`
       {
@@ -62,7 +62,7 @@ const mapQueriesToProps = ({ ownProps, state }) => ({
 })
 
 
-const mapMutationsToProps = ({ ownProps, state }) => ({
+const mapMutationsToProps = () => ({
   addCount: (amount) => ({
     mutation: gql`
       mutation addCount(
@@ -74,7 +74,7 @@ const mapMutationsToProps = ({ ownProps, state }) => ({
       }
     `,
     variables: {
-      amount: 1
+      amount
     }
   }),
   induceError: () => ({
