@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom'
 import { Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { StyleSheet } from 'aphrodite'
-import log from './log'
 import errorCatcher from './error-catcher'
 import routes from '../routes'
 import Store from '../store'
 import { ApolloProvider } from 'react-apollo'
 import ApolloClientSingleton from '../network/apollo-client-singleton'
 
-window.log = log
 window.onerror = (msg, file, line, col, error) => { errorCatcher(error) }
 window.addEventListener('unhandledrejection', (event) => { errorCatcher(event.reason) })
 

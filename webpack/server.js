@@ -1,7 +1,7 @@
 import WebpackDevServer from 'webpack-dev-server'
 import webpack from 'webpack'
 import config from './config'
-import log from '../src/server/log'
+import log from '../src/log'
 
 const webpackPort = 3000
 const appPort = process.env.DEV_APP_PORT

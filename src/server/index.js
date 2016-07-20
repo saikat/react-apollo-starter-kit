@@ -1,7 +1,7 @@
 import 'babel-polyfill'
 import bodyParser from 'body-parser'
 import express from 'express'
-import log from './log'
+import log from '../log'
 import appRenderer from './middleware/app-renderer'
 import { apolloServer } from 'apollo-server'
 import { schema, resolvers } from './api/schema'
