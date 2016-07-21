@@ -1,21 +1,21 @@
 import { createNetworkInterface } from 'apollo-client'
 
 class ResponseMiddlewareNetworkInterface {
-  constructor(endpoint = '/graphql') {
-    this.defaultNetworkInterface = createNetworkInterface(endpoint)
-    this.middlewares = []
+  constructor(endpoint = '/graphql', options = {}) {
+    this.defaultNetworkInterface = createNetworkInterface(endpoint, options)
+    this.responseMiddlewares = []
   }
 
   use(responseMiddleware) {
-    let middlewares = responseMiddleware
-    if (!Array.isArray(middlewares)) {
-      middlewares = [middlewares]
+    let responseMiddlewares = responseMiddleware
+    if (!Array.isArray(responseMiddlewares)) {
+      responseMiddlewares = [responseMiddlewares]
     }
-    middlewares.forEach((middleware) => {
+    responseMiddlewares.forEach((middleware) => {
       if (typeof middleware.applyMiddleware === 'function') {
-        this.defaultNetworkInterface.use(middleware)
+        this.defaultNetworkInterface.use([middleware])
       } else if (typeof middleware.applyResponseMiddleware === 'function') {
-        this.middlewares.push(middleware)
+        this.responseMiddlewares.push(middleware)
       } else {
         throw new Error('Middleware must implement the applyMiddleware or applyResponseMiddleware functions')
       }
@@ -23,7 +23,7 @@ class ResponseMiddlewareNetworkInterface {
   }
 
   async applyResponseMiddlewares(response) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const queue = async (funcs) => {
         const next = async () => {
           if (funcs.length > 0) {
@@ -36,7 +36,7 @@ class ResponseMiddlewareNetworkInterface {
         next()
       }
 
-      queue([...this.middlewares])
+      queue([...this.responseMiddlewares])
     })
   }
 
