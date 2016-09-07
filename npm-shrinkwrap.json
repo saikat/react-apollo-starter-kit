@@ -1,5 +1,5 @@
 {
-  "name": "react-apollo-starter-kit",
+  "name": "spoke",
   "version": "1.0.0",
   "dependencies": {
     "abbrev": {
@@ -2476,7 +2476,7 @@
     },
     "json-loader": {
       "version": "0.5.4",
-      "from": "json-loader@>=0.5.4 <0.6.0",
+      "from": "json-loader@latest",
       "resolved": "https://registry.npmjs.org/json-loader/-/json-loader-0.5.4.tgz"
     },
     "json-schema": {

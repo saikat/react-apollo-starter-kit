@@ -56,6 +56,7 @@
     "express": "^4.14.0",
     "graphql": "^0.6.1",
     "graphql-tag": "^0.1.9",
+    "json-loader": "^0.5.4",
     "minilog": "^3.0.1",
     "react": "^15.2.1",
     "react-apollo": "^0.3.15",
@@ -77,7 +78,6 @@
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.2.2",
     "foreman": "^1.4.1",
-    "json-loader": "^0.5.4",
     "nodemon": "^1.9.2",
     "webpack-dev-server": "^1.14.1"
   }
