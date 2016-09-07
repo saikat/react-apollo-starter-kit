@@ -1,5 +1,5 @@
 {
-  "name": "spoke",
+  "name": "react-apollo-starter-kit",
   "version": "1.0.0",
   "dependencies": {
     "abbrev": {
