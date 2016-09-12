@@ -28,7 +28,7 @@ This is an opinionated starter kit to start making an Apollo-based app. The goal
     * Unexpected exceptions in non-GraphQL server-side code: log.error + crash the server. In dev, nodemon will wait for changes to restart the server. In production, you should handle restarting the server (e.g. set Heroku to auto-restart dynos on a crash).
     * Unexpected exceptions in GraphQL code: log.error. This happens via a response middleware that is easily changeable.
 
-## Making and deploying a new app with this kit
+## Making new app with this kit
 1. Install [Node.js](https://nodejs.org/).
 1. Clone this starter kit
 1. Change the git remote to point to your new project's repo with `git remote set-url origin <new-url>`
@@ -40,4 +40,11 @@ This is an opinionated starter kit to start making an Apollo-based app. The goal
 1. Navigate to `http://localhost:3000` to see your app in action.
 1. Navigate to `http://localhost:3000/graphql` to mess around with the GraphQL API.
 1. Start making changes by working in the `src` directory
-1. Deploy your app to [Heroku](https://heroku.com). Make sure to set the correct environment variables there based on what exists in `.env` in this project!
+
+## Deploying this app to [Heroku]
+1. Deploy your app to [Heroku]. Make sure to set the correct environment variables there based on what exists in `.env` in this project!
+1. Allow [Heroku] to install build time dependencies from the devDependencies in package.json:
+   `Settings -> Config Variables -> Add`, KEY: `NPM_CONFIG_PRODUCTION`, VALUE: `false`.
+
+[Heroku Toolbelt]: (https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up)
+[Heroku]: (https://heroku.com)
