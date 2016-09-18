@@ -1,7 +1,7 @@
 {
-  "name": "spoke",
+  "name": "react-apollo-starter-kit",
   "version": "1.0.0",
-  "description": "Spoke",
+  "description": "React Apollo starter kit",
   "main": "src/server",
   "engines": {
     "node": "6.2.2",
@@ -25,7 +25,7 @@
     "url": "git+https://github.com/saikat/react-apollo-starter-kit.git"
   },
   "keywords": [
-    "spoke",
+    "react-apollo-starter-kit",
     "sms",
     "texting",
     "campaigns",
@@ -38,9 +38,9 @@
   "author": "Saikat Chakrabarti",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/saikat/spoke/issues"
+    "url": "https://github.com/saikat/react-apollo-starter-kit/issues"
   },
-  "homepage": "https://github.com/saikat/saikat/spoke/#readme",
+  "homepage": "https://github.com/saikat/saikat/react-apollo-starter-kit/#readme",
   "dependencies": {
     "aphrodite": "^0.4.1",
     "apollo-client": "^0.3.29",
