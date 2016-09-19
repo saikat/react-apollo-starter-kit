@@ -3,8 +3,8 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import log from '../log'
 import appRenderer from './middleware/app-renderer'
-import { apolloServer } from 'apollo-server'
-import { schema, resolvers } from './api/schema'
+import { apolloExpress } from 'apollo-server'
+import schema from './api/schema'
 import mocks from './api/mocks'
 
 process.on('uncaughtException', (ex) => {
@@ -29,12 +29,11 @@ if (process.env.NODE_ENV === 'production') {
   }))
 }
 
-app.use('/graphql', apolloServer(() => ({
+app.use('/graphql', apolloExpress(() => ({
   graphiql: true,
   pretty: true,
   schema,
   mocks,
-  resolvers,
   allowUndefinedInResolve: false
 })))
 // This middleware should be last. Return the React app only if no other route is hit.

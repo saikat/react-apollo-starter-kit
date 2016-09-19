@@ -1,5 +1,6 @@
 import { schema as countSchema, resolvers as countResolvers } from './count'
 import Data from './data'
+import { makeExecutableSchema } from 'graphql-tools'
 
 const rootSchema = `
   type RootQuery {
@@ -27,17 +28,24 @@ const rootResolvers = {
       return Data.count
     },
     induceError() {
-      throw new Error('Error message')
+      throw new Error('Custom error message')
     }
   }
 }
 
-export const schema = [
+const schema = [
   rootSchema,
   countSchema
 ]
 
-export const resolvers = {
+const resolvers = {
   ...rootResolvers,
   ...countResolvers
 }
+
+const executableSchema = makeExecutableSchema({
+  typeDefs: schema,
+  resolvers
+})
+
+export default executableSchema

@@ -1,91 +1,81 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { connect } from 'react-apollo'
-import { addCount } from '../store/actions'
+import { graphql } from 'react-apollo'
 import { Link } from 'react-router'
 
-function RemoteCounter({ data, addCount, mutations }) {
+function RemoteCounter({ data, addCount, induceError }) {
   if (data.loading) {
     return (
       <div>
         Loading...
       </div>
     )
-  } else {
-    return (
-      <div>
-        <div>
-          Current count is {data.count.amount}. This is being stored server-side in the database and using Apollo to update.
-        </div>
-        <button onClick={async () => {
-          // This is temporary until https://github.com/apollostack/react-apollo/issues/93 is done
-          let mutationResult = await mutations.addCount(1)
-          if (mutationResult)
-            data.refetch()
-        }}>
-          Click to increase count
-        </button>
-        <br />
-        <button onClick={async () => {
-          // This is temporary until https://github.com/apollostack/react-apollo/issues/93 is done
-          let mutationResult = await mutations.induceError()
-        }}>
-          Click to induce a GraphQL error
-        </button>
-        <div>
-          <Link to='/local-counter'>
-            See a version using client-side memory
-          </Link>
-        </div>
-      </div>
-    )
   }
+  return (
+    <div>
+      <div>
+        Current count is {data.count.amount}. This is being stored server-side in the database and using Apollo to update.
+      </div>
+      <button
+        onClick={async () => {
+          await addCount(1)
+        }}
+      >
+        Click to increase count
+      </button>
+      <br />
+      <button onClick={async () => {
+        await induceError()
+      }}>
+        Click to induce a GraphQL error
+      </button>
+      <div>
+        <Link to='/local-counter'>
+          See a version using client-side memory
+        </Link>
+      </div>
+    </div>
+  )
 }
 
 RemoteCounter.propTypes = {
-  data: React.PropTypes.object.isRequired,
-  addCount: React.PropTypes.object.isRequired,
-  mutations: React.PropTypes.object.isRequired
+  data: React.PropTypes.object.isRequired
 }
 
-const mapQueriesToProps = () => ({
-  data: {
-    query: gql`
-      {
-        count {
-          amount
-        }
-      }
-    `
-  }
-})
-
-
-const mapMutationsToProps = () => ({
-  addCount: (amount) => ({
-    mutation: gql`
-      mutation addCount(
-        $amount: Int!
-      ) {
-        addCount(amount: $amount) {
-          amount
-        }
-      }
-    `,
-    variables: {
+const CurrentCount = gql`
+  query CurrentCount {
+    count {
+      id
       amount
     }
-  }),
-  induceError: () => ({
-    mutation: gql`
-      mutation induceError {
-        induceError
-      }
-    `
-  })
-})
+  }
+`
 
-export default connect({
-  mapQueriesToProps,
-  mapMutationsToProps
-})(RemoteCounter)
+const AddCount = gql`
+  mutation AddCount($amount: Int!) {
+    addCount(amount: $amount) {
+      id
+      amount
+    }
+  }
+`
+
+const InduceError = gql`
+  mutation InduceError {
+    induceError
+  }
+`
+
+const RemoteCounterWithData = graphql(CurrentCount)(RemoteCounter)
+
+const RemoteCounterWithDataAndMutations = graphql(AddCount, {
+  props: ({ mutate }) => ({
+    addCount: (amount) => mutate({ variables: { amount } })
+  })
+})(
+  graphql(InduceError, {
+    props: ({ mutate }) => ({
+      induceError: () => mutate()
+    })
+  })(RemoteCounterWithData))
+export default RemoteCounterWithDataAndMutations
