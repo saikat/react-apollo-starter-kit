@@ -68,7 +68,6 @@
     "react-router-redux": "^4.0.5",
     "redux-thunk": "^2.1.0",
     "rollbar": "^0.6.2",
-    "thinky": "^2.3.6",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.1",
     "webpack-manifest-plugin": "^1.0.1"
