@@ -1,6 +1,6 @@
 import React from 'react'
 import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import { Link } from 'react-router'
 
 function RemoteCounter({ data, addCount, induceError }) {
@@ -66,16 +66,16 @@ const InduceError = gql`
   }
 `
 
-const RemoteCounterWithData = graphql(CurrentCount)(RemoteCounter)
-
-const RemoteCounterWithDataAndMutations = graphql(AddCount, {
-  props: ({ mutate }) => ({
-    addCount: (amount) => mutate({ variables: { amount } })
-  })
-})(
+export default compose(
+  graphql(CurrentCount),
+  graphql(AddCount, {
+    props: ({ mutate }) => ({
+      addCount: (amount) => mutate({ variables: { amount } })
+    })
+  }),
   graphql(InduceError, {
     props: ({ mutate }) => ({
       induceError: () => mutate()
     })
-  })(RemoteCounterWithData))
-export default RemoteCounterWithDataAndMutations
+  })
+)(RemoteCounter)
