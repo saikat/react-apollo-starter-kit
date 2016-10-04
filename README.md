@@ -38,7 +38,7 @@ This is an opinionated starter kit to start making an Apollo-based app. The goal
 1. `npm install`
 1. `npm run dev`
 1. Navigate to `http://localhost:3000` to see your app in action.
-1. Navigate to `http://localhost:3000/graphql` to mess around with the GraphQL API.
+1. Navigate to `http://localhost:3000/graphiql` to mess around with the GraphQL API.
 1. Start making changes by working in the `src` directory
 
 ## Deploying this app to [Heroku]

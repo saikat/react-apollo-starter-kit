@@ -6,6 +6,7 @@ import appRenderer from './middleware/app-renderer'
 import { apolloExpress } from 'apollo-server'
 import schema from './api/schema'
 import mocks from './api/mocks'
+import { graphiqlExpress } from 'apollo-server'
 
 process.on('uncaughtException', (ex) => {
   log.error(ex)
@@ -28,6 +29,10 @@ if (process.env.NODE_ENV === 'production') {
     maxAge: '180 days'
   }))
 }
+
+app.use('/graphiql', graphiqlExpress({
+  endpointURL: '/graphql'
+}))
 
 app.use('/graphql', apolloExpress(() => ({
   graphiql: true,
