@@ -7,5 +7,4 @@ export default (fn) =>
     fn(...args)
       .catch((ex) => {
         log.error(ex)
-        process.nextTick(() => { throw ex })
       })
