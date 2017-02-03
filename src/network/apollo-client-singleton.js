@@ -1,4 +1,4 @@
-import ApolloClient, { addQueryMerging } from 'apollo-client'
+import ApolloClient from 'apollo-client'
 import ResponseMiddlewareNetworkInterface from './response-middleware-network-interface'
 import log from '../log'
 
@@ -17,7 +17,7 @@ responseMiddlewareNetworkInterface.use({
   }
 })
 
-const networkInterface = addQueryMerging(responseMiddlewareNetworkInterface)
+const networkInterface = responseMiddlewareNetworkInterface
 
 const ApolloClientSingleton = new ApolloClient({
   networkInterface,

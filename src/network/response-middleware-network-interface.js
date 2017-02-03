@@ -1,8 +1,12 @@
-import { createNetworkInterface } from 'apollo-client'
+import { createBatchingNetworkInterface } from 'apollo-client'
 
 class ResponseMiddlewareNetworkInterface {
   constructor(endpoint = '/graphql', options = {}) {
-    this.defaultNetworkInterface = createNetworkInterface(endpoint, options)
+    this.defaultNetworkInterface = createBatchingNetworkInterface({
+      uri: endpoint,
+      batchInterval: 10,
+      opts: options
+    })
     this.responseMiddlewares = []
   }
 

@@ -3,10 +3,9 @@ import bodyParser from 'body-parser'
 import express from 'express'
 import log from '../log'
 import appRenderer from './middleware/app-renderer'
-import { apolloExpress } from 'apollo-server'
+import { graphqlExpress, graphiqlExpress } from 'graphql-server-express'
 import schema from './api/schema'
 import mocks from './api/mocks'
-import { graphiqlExpress } from 'apollo-server'
 
 process.on('uncaughtException', (ex) => {
   log.error(ex)
@@ -34,13 +33,13 @@ app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql'
 }))
 
-app.use('/graphql', apolloExpress(() => ({
+app.use('/graphql', graphqlExpress({
   graphiql: true,
   pretty: true,
   schema,
   mocks,
   allowUndefinedInResolve: false
-})))
+}))
 // This middleware should be last. Return the React app only if no other route is hit.
 app.use(appRenderer)
 app.listen(port, () => {

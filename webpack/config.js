@@ -24,10 +24,9 @@ const config = {
     bundle: ['babel-polyfill', './src/client/index.jsx']
   },
   module: {
-    noParse: [],
-    loaders: [
-      { test: /\.json$/, loader: 'json' },
-      { test: /\.css$/, loader: 'style!css' },
+    rules: [
+      { test: /\.json$/, loader: 'json-loader' },
+      { test: /\.css$/, loader: 'style-loader!css' },
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
@@ -39,10 +38,10 @@ const config = {
     ]
   },
   node: {
-    fs: "empty"
+    fs: 'empty'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   plugins,
   output: {
