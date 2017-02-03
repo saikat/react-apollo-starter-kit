@@ -1,12 +1,14 @@
-import ApolloClient from 'apollo-client'
-import ResponseMiddlewareNetworkInterface from './response-middleware-network-interface'
+import ApolloClient, { createBatchingNetworkInterface } from 'apollo-client'
 import log from '../log'
 
-const responseMiddlewareNetworkInterface = new ResponseMiddlewareNetworkInterface()
+const networkInterface = createBatchingNetworkInterface({
+  uri: '/graphql',
+  batchInterval: 10
+})
 
 // Sample error handling middleware
-responseMiddlewareNetworkInterface.use({
-  applyResponseMiddleware: (response, next) => {
+networkInterface.useAfter([{
+  applyAfterware({ response }, next) {
     if (response.errors) {
       if (typeof window !== 'undefined') {
         log.error(JSON.stringify(response.errors))
@@ -15,9 +17,7 @@ responseMiddlewareNetworkInterface.use({
     }
     next()
   }
-})
-
-const networkInterface = responseMiddlewareNetworkInterface
+}])
 
 const ApolloClientSingleton = new ApolloClient({
   networkInterface,
